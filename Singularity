@@ -25,29 +25,29 @@ Stage: build_openblas
 
     make PREFIX=/usr install
     cat >/usr/lib/pkgconfig/blas.pc <<-___HERE
-        prefix=/usr
-        libdir=\${prefix}/lib
-        includedir=\${prefix}/include
-        Name: openblas-blas
-        Description: Optimized BLAS (linear algebra) library based on GotoBLAS2
-        Version: ${OPENBLAS_VERSION}
-        URL: https://github.com/xianyi/OpenBLAS
-        Libs: -L\${libdir} -lopenblas
-        Libs.private: -lgfortran -lgomp -lm -lpthread
-        Cflags: -I\${includedir}
-___HERE
+	prefix=/usr
+	libdir=\${prefix}/lib
+	includedir=\${prefix}/include
+	Name: openblas-blas
+	Description: Optimized BLAS (linear algebra) library based on GotoBLAS2
+	Version: ${OPENBLAS_VERSION}
+	URL: https://github.com/xianyi/OpenBLAS
+	Libs: -L\${libdir} -lopenblas
+	Libs.private: -lgfortran -lgomp -lm -lpthread
+	Cflags: -I\${includedir}
+	___HERE
     cat >/usr/lib/pkgconfig/lapack.pc <<-___HERE
-        prefix=/usr
-        libdir=\${prefix}/lib
-        includedir=\${prefix}/include
-        Name: openblas-lapack
-        Description: Optimized BLAS (linear algebra) library, LAPACK
-        Version: ${OPENBLAS_VERSION}
-        URL: https://github.com/xianyi/OpenBLAS
-        Libs: -L\${libdir} -lopenblas
-        Libs.private: -lgfortran -lgomp -lm -lpthread
-        Cflags: -I\${includedir}
-___HERE
+	prefix=/usr
+	libdir=\${prefix}/lib
+	includedir=\${prefix}/include
+	Name: openblas-lapack
+	Description: Optimized BLAS (linear algebra) library, LAPACK
+	Version: ${OPENBLAS_VERSION}
+	URL: https://github.com/xianyi/OpenBLAS
+	Libs: -L\${libdir} -lopenblas
+	Libs.private: -lgfortran -lgomp -lm -lpthread
+	Cflags: -I\${includedir}
+	___HERE
 
 
 Bootstrap: docker
