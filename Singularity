@@ -17,14 +17,14 @@ Stage: build_openblas
     wget -q "https://github.com/xianyi/OpenBLAS/archive/v${OPENBLAS_VERSION}.tar.gz"
     tar xf "v${OPENBLAS_VERSION}.tar.gz"
     cd "OpenBLAS-${OPENBLAS_VERSION}"
-    make ARCH=amd64 BINARY=64 \
+    make ARCH=amd64 BINARY=64 INTERFACE64=1 \
          USE_THREAD=1 USE_OPENMP=1 NUM_THREADS=128 \
          NO_AFFINITY=1 NO_LAPACKE=1 \
          TARGET=NEHALEM DYNAMIC_ARCH=1 \
          GEMM_MULTITHREADING_THRESHOLD=50
 
     make PREFIX=/usr install
-    cat >/usr/lib/pkgconfig/blas.pc <<-___HERE
+    cat >/usr/lib/pkgconfig/blas64.pc <<-___HERE
 	prefix=/usr
 	libdir=\${prefix}/lib
 	includedir=\${prefix}/include
@@ -36,7 +36,7 @@ Stage: build_openblas
 	Libs.private: -lgfortran -lgomp -lm -lpthread
 	Cflags: -I\${includedir}
 	___HERE
-    cat >/usr/lib/pkgconfig/lapack.pc <<-___HERE
+    cat >/usr/lib/pkgconfig/lapack64.pc <<-___HERE
 	prefix=/usr
 	libdir=\${prefix}/lib
 	includedir=\${prefix}/include
